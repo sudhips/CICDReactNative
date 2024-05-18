@@ -28,7 +28,7 @@ const TodoHeader = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID="todo-header">
       <Text style={{color: '#FFFFFF', fontSize: 24, textAlign: 'center'}}>
         What's your plan for today?
       </Text>

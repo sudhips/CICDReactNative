@@ -42,7 +42,7 @@ const TodoList = () => {
   };
 
   return (
-    <View style={{flex: 1}}>
+    <View style={{flex: 1}} testID="todo-list">
       <Text
         style={{
           color: '#FFFFFF',
