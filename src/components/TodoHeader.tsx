@@ -7,8 +7,12 @@ import {
   TextInput,
   TouchableOpacity,
   Alert,
+  Button,
 } from 'react-native';
 import {useDispatch} from 'react-redux';
+import Crashes from 'appcenter-crashes'
+import Analytics from 'appcenter-analytics'
+
 import {addTask} from '../redux/taskSlice';
 
 const TodoHeader = () => {
@@ -17,10 +21,12 @@ const TodoHeader = () => {
 
   const onSubmitTask = () => {
     if (todo.trim().length === 0) {
+      Analytics.trackEvent('add_task_with_empty_content')
       Alert.alert('Please enter a task');
       setTodo('');
       return;
     }
+    Analytics.trackEvent('add_task_success')
     dispatch(addTask({task: todo}));
     setTodo('');
 
@@ -59,6 +65,13 @@ const TodoHeader = () => {
           }}>
           <Text style={{color: '#ffbb39'}}>Add</Text>
         </TouchableOpacity>
+        <Button 
+          title='Crash'
+          onPress={()=>{
+            Analytics.trackEvent('test_crash')
+            Crashes.generateTestCrash()
+          }}
+        />
       </View>
     </View>
   );
